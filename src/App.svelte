@@ -1,28 +1,49 @@
 <script>
-	export let name;
+	import QrCode from "svelte-qrcode"
+	let value = 'https://github.com/emrekayik';
+
+	function selectAll(){
+		this.setSelectionRange(0, this.value.length)
+	}
+
+	$: background = '';
 </script>
 
 <main>
-	<h1>Hello {name}!</h1>
-	<p>Visit the <a href="https://svelte.dev/tutorial">Svelte tutorial</a> to learn how to build Svelte apps.</p>
+	<div class="card">
+		<h1>QRCardEK</h1>
+		<div class="image-area">
+			<QrCode {value} background="#1f3251"/>
+		</div>
+		<input bind:value={value} on:focus={selectAll} placeholder="enter your url">
+	</div>
 </main>
 
 <style>
 	main {
-		text-align: center;
-		padding: 1em;
-		max-width: 240px;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+		height: 100vh;
+		width: 100%;
 		margin: 0 auto;
 	}
-
-	h1 {
-		color: #ff3e00;
-		text-transform: uppercase;
-		font-size: 4em;
-		font-weight: 100;
+	.card{
+		padding: 12px;
+		border-radius: 5px;
+		box-shadow: 0px 0px 5px 0px #1f3251;
+		background-color: #1f3251;
+		overflow: hidden;
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+		height: 300px;
+		resize: both;
 	}
 
-	@media (min-width: 640px) {
+	@media (max-width: 375px) {
 		main {
 			max-width: none;
 		}
